@@ -1,0 +1,20 @@
+services:
+  ai-image-tool:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      # Conserve le modèle téléchargé entre les redémarrages du conteneur
+      - hf-cache:/app/.cache/huggingface
+    # Décommentez les 2 lignes suivantes si vous avez un GPU NVIDIA
+    # et le NVIDIA Container Toolkit installé, pour accélérer la génération :
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+volumes:
+  hf-cache:
